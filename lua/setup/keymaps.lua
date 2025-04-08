@@ -105,11 +105,18 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+-- Tab Management (use <leader>t as the namespace)
+map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 
+-- Tab Navigation
+map("n", "<leader>tl", "<cmd>tabnext<cr>", { desc = "Next Tab" })       -- l for → (right)
+map("n", "<leader>th", "<cmd>tabprevious<cr>", { desc = "Previous Tab" }) -- h for ← (left)
+map("n", "<leader>t1", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader>t$", "<cmd>tablast<cr>", { desc = "Last Tab" }) -- like `g$`, goes to the last
+
+-- Optional: quickly jump to a specific tab (1-9)
+for i = 1, 9 do
+  map("n", ("<leader>%d"):format(i), ("<cmd>tabnext %d<cr>"):format(i), { desc = ("Go to Tab %d"):format(i) })
+end

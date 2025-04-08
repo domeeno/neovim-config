@@ -1,5 +1,5 @@
 return {
-{
+  {
     "nvim-tree/nvim-tree.lua",
     config = function()
       vim.keymap.set('n', '<leader><leader>', '<cmd>NvimTreeToggle<CR>', { desc = "Toggle Explorer" })
