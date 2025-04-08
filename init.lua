@@ -1,6 +1,5 @@
-require("util.utils")
+require("setup.options")
+require("setup.keymaps")
+require("setup.autocmds")
 require("config.lazy")
-require("config.autocmds")
-require("config.options")
-require("config.keymaps")
-require("config.themes")
+
