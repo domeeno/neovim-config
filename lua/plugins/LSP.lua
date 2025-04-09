@@ -7,7 +7,6 @@ return {
   },
   { "williamboman/mason-lspconfig.nvim" },
 
-
   -- LSP
   {
     "neovim/nvim-lspconfig",
