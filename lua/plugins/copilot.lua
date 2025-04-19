@@ -1,4 +1,3 @@
 return {
-  -- Copilot
-  { 'github/copilot.vim', opts = {} }
+  { 'github/copilot.vim' }
 }

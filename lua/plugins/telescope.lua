@@ -22,13 +22,14 @@ return {
 
       -- Keybindings
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+      vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep' })
+      vim.keymap.set('n', '<leader>sw', builtin.live_grep, { desc = '[F]ind [G]rep' })
       vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind Recently [O]pen files' })
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Existing [B]uffers' })
-      vim.keymap.set('n', '<leader>sw', function()
-        builtin.grep_string({ search = vim.fn.input("Grep > ") })
-      end, { desc = '[S]earch [W]ord' })
+      -- vim.keymap.set('n', '<leader>sw', function()
+      --   builtin.grep_string({ search = vim.fn.input("Grep > ") })
+      -- end, { desc = '[S]earch [W]ord' })
 
       -- Bind F4 to code actions with telescope-ui-select
       vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, { desc = 'LSP Code Actions (F4)' })
