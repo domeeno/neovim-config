@@ -11,8 +11,6 @@ return {
             return vim.o.columns * 0.4
           end
         end,
-        -- open terminals horizontally at the bottom
-        open_mapping = [[<C-t>]], -- shortcut to open
         shading_factor = 2,
         start_in_insert = true,
         insert_mappings = true,
@@ -20,7 +18,21 @@ return {
         persist_size = true,
         persist_mode = true,
       }
-      vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+
+      -- Keymaps
+      -- <C-t>: toggles the terminal in horizontal or vertical (default terminal)
+      vim.keymap.set("n", "<C-t>", function()
+        -- This will toggle terminal 1 (default) in horizontal or vertical depending on last used
+        vim.cmd("ToggleTerm")
+      end, { desc = "Toggle Terminal (default layout)" })
+
+      -- <leader>t: toggle floating terminal
+      vim.keymap.set("n", "<leader>t", function()
+        require("toggleterm.terminal").Terminal
+          :new({ direction = "float" })
+          :toggle()
+      end, { desc = "Toggle Floating Terminal" })
     end
   }
 }
+

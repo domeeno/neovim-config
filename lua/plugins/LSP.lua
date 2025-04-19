@@ -45,7 +45,7 @@ return {
       end)
 
       require("mason-lspconfig").setup({
-        ensure_installed = { "clangd", "lua_ls", "jdtls", "gopls" },
+        ensure_installed = { "lua_ls", "jdtls", "gopls" },
         handlers = {
           lsp_zero.default_setup,
           lua_ls = function()
@@ -57,6 +57,17 @@ return {
 
       require("mason-nvim-dap").setup({
         ensure_installed = { "cppdbg", "java-debug-adapter", "java-test" }
+      })
+
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = "●", -- Could be '●', '▎', 'x'
+          spacing = 4,
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = false,
       })
     end
   },
@@ -73,7 +84,6 @@ return {
     end
   },
 
-
   -- Autocompletion & snippets
   {
     "hrsh7th/nvim-cmp",
@@ -85,6 +95,7 @@ return {
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
+      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
@@ -95,6 +106,19 @@ return {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end
+        },
+
+        formatting = {
+          format = function(entry, vim_item)
+            local lspkind = require("lspkind")
+            vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+            return vim_item
+          end,
+        },
+
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
 
         mapping = cmp.mapping.preset.insert({
