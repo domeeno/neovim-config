@@ -111,7 +111,17 @@ return {
         formatting = {
           format = function(entry, vim_item)
             local lspkind = require("lspkind")
-            vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+
+            -- Check if the source is Copilot
+            if entry.source.name == "copilot" then
+              -- Custom formatting for Copilot suggestions
+              vim_item.kind = " " .. vim_item.kind -- You can use a Copilot icon (like "") or any other text
+              vim_item.menu = "[Copilot]" -- Optional: add a menu label for Copilot
+            else
+              -- Default formatting for LSP
+              vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+            end
+
             return vim_item
           end,
         },
@@ -119,6 +129,12 @@ return {
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
+        },
+
+        matching = {
+          disallow_fuzzy_matching = false,
+          disallow_partial_matching = false,
+          disallow_exact_matching = false,
         },
 
         mapping = cmp.mapping.preset.insert({
@@ -152,6 +168,7 @@ return {
         }),
 
         sources = cmp.config.sources({
+          { name = "copilot",                group_index = 1 },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
@@ -185,7 +202,7 @@ return {
     config = function() require("nvim-ts-autotag").setup() end
   },
 
-   -- DAP
+  -- DAP
   {
     "mfussenegger/nvim-dap",
     dependencies = {
