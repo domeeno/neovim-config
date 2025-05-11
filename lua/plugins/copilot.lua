@@ -6,7 +6,6 @@ return {
     config = function()
       require("copilot").setup({
         suggestion = { enabled = false }, -- turn off inline suggestions
-        panel = { enabled = false },
       })
     end
   },

@@ -106,7 +106,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.cmd([[
   augroup jdtls_lsp
     autocmd!
-    autocmd FileType java lua require('setup.jdtls.jdtls').setup_jdtls()
+    autocmd FileType java lua require("setup.jdlts.jdtls").setup_jdtls()
   augroup END
 ]])
-
