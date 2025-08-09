@@ -45,7 +45,7 @@ return {
       end)
 
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "jdtls", "gopls" },
+        ensure_installed = { "lua_ls", "jdtls" },
         handlers = {
           lsp_zero.default_setup,
           lua_ls = function()
