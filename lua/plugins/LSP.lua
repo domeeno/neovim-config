@@ -72,18 +72,6 @@ return {
     end
   },
 
-  {
-    -- LuaSnip + VSCode-style snippet support
-    "L3MON4D3/LuaSnip",
-    version = "v2.*", -- stable release
-    build = "make install_jsregexp",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets" }) -- optional local snippets
-    end
-  },
-
   -- Autocompletion & snippets
   {
     "hrsh7th/nvim-cmp",
@@ -100,8 +88,20 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      luasnip.add_snippets("tex", require("snippets.tex"))
+
+      luasnip.config.set_config({
+        enable_autosnippets = true,
+        store_selection_keys = "<Tab>",
+      })
 
       cmp.setup({
+        -- Enable completion triggering immediately
+        completion = {
+          keyword_length = 1,
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -167,7 +167,10 @@ return {
         }),
 
         sources = cmp.config.sources({
-          { name = "copilot",                group_index = 1 },
+          {
+            name = "copilot",
+            group_index = 1
+          },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
