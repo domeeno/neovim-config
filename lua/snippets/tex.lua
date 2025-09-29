@@ -21,4 +21,53 @@ return {
       {}
     \end{{frame}}
   ]], { i(1, "Title"), i(2, "Content") })),
+
+  s("ita", fmt([[
+    \begin{{itemize}}
+      \item<2->{}
+      \item<3->{}
+      \item<4->{}
+    \end{{itemize}}
+    ]], { i(1, "Item"), i(2, "Item"), i(3, "Item") })
+  ),
+
+  s("it", fmt([[
+    \begin{{itemize}}
+      \item {}
+      \item {}
+      \item {}
+    \end{{itemize}}
+    ]], { i(1, "Item"), i(2, "Item"), i(3, "Item") })
+  ),
+
+  s("cl", fmt([[
+    \begin{{columns}}
+      \begin{{column}}{{0.50\textwidth}}
+        {}
+      \end{{column}}
+      \begin{{column}}{{0.50\textwidth}}
+        {}
+      \end{{column}}
+    \end{{columns}}
+    ]], { i(1, "Left"), i(2, "Right") })
+  ),
+
+  s("bl", fmt([[
+  \begin{{block}}{{{}}}
+    {}
+  \end{{block}}
+  ]], { i(1, "Title"), i(2, "Content") })
+  ),
+
+  s("o", fmt([[
+    \onslide<{}->{{{}}}
+  ]], { i(1, "2"), i(2, "Content") })
+  ),
+
+  s("ig", fmt([[
+    \begin{{figure}}[h]
+      \centering
+      \includegraphics[width=0.8\linewidth]{{./assets/{}}}
+    \end{{figure}}
+  ]], { i(1, "") })),
 }
