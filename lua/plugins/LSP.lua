@@ -167,15 +167,12 @@ return {
         }),
 
         sources = cmp.config.sources({
-          {
-            name = "copilot",
-            group_index = 1
-          },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
           { name = "nvim_lsp_signature_help" },
+          { name = "copilot", },
         }),
       })
     end
