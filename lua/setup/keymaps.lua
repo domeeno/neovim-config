@@ -110,7 +110,8 @@ map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- tabs
 -- Tab Management (use <leader>t as the namespace)
-map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
+-- map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<C-.>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 
@@ -128,5 +129,5 @@ end
 
 -- UTILS
 map("n", "<C-b>", function()
-  require("utils.run_cpp").run_current_cpp()
-end, { noremap = true, silent = true, desc = "Compile and run C++" })
+  require("utils.runner_dispatcher").run()
+end, { noremap = true, silent = true, desc = "Build and run program" })

@@ -13,23 +13,26 @@ local function run_in_terminal(cmd, dir)
 end
 
 -- Compiles and runs the currently opened C++ file in a new terminal
-function M.run_current_cpp()
-  local dir = vim.fn.expand('%:p:h')
-  local file = vim.fn.expand('%:p')
-  local filename = vim.fn.expand('%:t')
+function M.run()
+  local dir = vim.fn.getcwd()
 
   -- Check for a custom run script
   local run_script = dir .. "/run.sh"
+
   if vim.fn.filereadable(run_script) == 1 then
+    vim.notify("running run script")
     run_in_terminal(run_script, dir)
     return
   end
 
-  -- Fallback: compile and run the current C++ file
-  local output = dir .. "/a.out"
-  local compile_cmd = string.format("g++ -std=c++17 %s -o %s && %s", file, output, output)
-
-  run_in_terminal(compile_cmd, dir)
+  if vim.fn.filereadable(file) == 1 then
+    local file = vim.fn.expand('%:p')
+    vim.notify("running g++ on " .. file)
+    local output = dir .. "/a.out"
+    local compile_cmd = string.format("g++ -std=c++17 %s -o %s && %s", file, output, output)
+    run_in_terminal(compile_cmd, dir)
+    return
+  end
 end
 
 return M
