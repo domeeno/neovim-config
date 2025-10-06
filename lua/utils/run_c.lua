@@ -24,6 +24,15 @@ function M.run()
     run_in_terminal(run_script, dir)
     return
   end
+
+  if vim.fn.filereadable(file) == 1 then
+    local file = vim.fn.expand('%:p')
+    vim.notify("running gcc on " .. file)
+    local output = dir .. "/a.out"
+    local compile_cmd = string.format("gcc %s -o %s && %s", file, output, output)
+    run_in_terminal(compile_cmd, dir)
+    return
+  end
 end
 
 return M

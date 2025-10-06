@@ -3,6 +3,7 @@ local M = {}
 
 -- Map of filetypes to modules
 local runners = {
+  c = "utils.run_c",
   cpp = "utils.run_cpp",
   python = "utils.run_py",
   java = "utils.run_java",

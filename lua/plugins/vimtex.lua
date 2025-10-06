@@ -17,6 +17,5 @@ return {
       },
       engine = 'xelatex'
     }
-    vim.g.vimtex_quickfix_mode = 0 -- no auto open
   end
 }
