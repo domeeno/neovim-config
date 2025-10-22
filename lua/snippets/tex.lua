@@ -22,6 +22,26 @@ return {
     \end{{frame}}
   ]], { i(1, "Title"), i(2, "Content") })),
 
+  s("blfr", fmt([[
+    \begin{{frame}}{{{}}}
+      \begin{{block}}{{{}}}
+        {}
+      \end{{block}}
+    \end{{frame}}
+  ]], { i(1, "Title"), i(2, "Block Title"), i(3, "Content") })),
+
+  s("slide", fmt([[
+    \begin{{frame}}{{{}}}
+      \begin{{block}}{{{}}}
+        \begin{{itemize}}
+          \item<2->{}
+          \item<3->{}
+          \item<4->{}
+        \end{{itemize}}
+      \end{{block}}
+    \end{{frame}}
+  ]], { i(1, "Title"), i(2, "Block Title"), i(3, "Item"), i(4, "Item"), i(5, "Item") })),
+
   s("ita", fmt([[
     \begin{{itemize}}
       \item<2->{}
