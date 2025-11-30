@@ -42,3 +42,7 @@ vim.opt.splitright = true -- open split window to the right (instead of default 
 
 vim.opt.clipboard = "unnamedplus" -- tell nvim to sync clipboard with system keyboard
 
+-- language specific
+
+vim.opt.fileencoding = "utf-8"
+
