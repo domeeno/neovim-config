@@ -1,4 +1,3 @@
-
 -- lazy
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
@@ -29,9 +28,9 @@ vim.keymap.set("n", "<leader>rr", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "R
 vim.keymap.set("v", "<leader>rr", [["hy:%s/<C-r>h//g<Left><Left>]], { desc = "Replace selection" })
 
 -- Tab navigation
-vim.keymap.set("n", "<C-.>", "<cmd>tabnew<cr>", { desc = "New Tab" })a
-vim.keymap.set("n", "<A-1>", "<cmd>tabnext<cr>", { desc = "Next Tab" })         -- l for → (right)
-vim.keymap.set("n", "<A-2>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" }) -- h for ← (left)
+vim.keymap.set("n", "<A-.>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<A-l>", "<cmd>tabnext<cr>", { desc = "Next Tab" })         -- l for → (right)
+vim.keymap.set("n", "<A-h>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" }) -- h for ← (left)
 for i = 1, 9 do
   vim.keymap.set("n", ("<leader>%d"):format(i), ("<cmd>tabnext %d<cr>"):format(i), { desc = ("Go to Tab %d"):format(i) })
 end
