@@ -2,7 +2,7 @@
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- exit terminal insert mode with <ESC>
-w.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
