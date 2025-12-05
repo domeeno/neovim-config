@@ -9,7 +9,7 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<Leader>s", -- init (s)election,
+            init_selection = "<Leader>si", -- (s)election (i)nit,
             node_incremental = "<Leader>sw", -- (s)election up (w) like the games up == 'w'
             scope_incremental = "<Leader>s<Leader>", -- (s)election jump - like jumping space, it's a big select
             node_decremental = "<Leader>ss", -- (s)selection down (s) like the games back == 's'
