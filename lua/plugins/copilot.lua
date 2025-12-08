@@ -3,17 +3,23 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false }, -- turn off inline suggestions
-      })
-    end
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end,
+    event = "BufReadPost",
+    opts = {
+      suggestion = {
+        enabled = false,
+        auto_trigger = true,
+        hide_during_completion = false,
+        keymap = {
+          accept = false, -- handled by nvim-cmp / blink.cmp
+          next = "<M-]>",
+          prev = "<M-[>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
   }
 }

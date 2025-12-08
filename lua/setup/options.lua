@@ -1,116 +1,48 @@
--- Set leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
 
--- General globals
-vim.g.autoformat = true
-vim.g.lazyvim_picker = "auto"
-vim.g.ai_cmp = true
-vim.g.deprecation_warnings = false
-vim.g.trouble_lualine = true
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-vim.g.root_lsp_ignore = { "copilot" }
-vim.g.markdown_recommended_style = 0
+vim.opt.wrap = false -- disable line wrap
 
--- Disable netrw (when using a modern file explorer)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.opt.expandtab = true -- spaces instead of tabs
+vim.opt.tabstop = 2 -- tabbing is inserting 4 spaces instead of default (8)
+vim.opt.shiftwidth = 2 -- shift nicely
 
-local opt = vim.opt
+vim.opt.inccommand = "split" -- add a split window on edit to live preview change (instead of the current editor)
 
--- File & backup handling
-opt.undofile = true
-opt.undolevels = 10000
-opt.backup = false
-opt.writebackup = false
-opt.fileencoding = "utf-8"
+vim.opt.ignorecase = false -- false to ingorecase on vim commands like (:echo, :TSUpdate etc.).
 
--- Search
-opt.ignorecase = true
-opt.smartcase = true
-opt.hlsearch = true
-opt.grepformat = "%f:%l:%c:%m"
-opt.grepprg = "rg"
+-- editing
 
--- UI
-opt.number = true
-opt.relativenumber = true
-opt.numberwidth = 2
-opt.cursorline = true
-opt.signcolumn = "yes"
-opt.showmode = false
-opt.ruler = false
-opt.linebreak = true
-opt.breakindent = true
-opt.scrolloff = 10
-opt.sidescrolloff = 8
-opt.laststatus = 3
-opt.mouse = "a"
-opt.termguicolors = true
--- opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
-opt.pumblend = 10
-opt.pumheight = 10
-opt.list = true
-opt.timeoutlen = vim.g.vscode and 1000 or 300
-opt.updatetime = 200
-opt.cmdheight = 1
+vim.opt.virtualedit = "block" -- allow virtual edit for visual block mode (for CTRL+V to go further than line cells)
 
--- Tabs & Indentation
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.tabstop = 2
-opt.shiftround = true
-opt.smartindent = true
 
--- Completion
-opt.completeopt = "menu,menuone,noselect"
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+-- history
 
--- Folding
-opt.foldlevel = 99
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
+vim.opt.undofile = true -- preserve history after end session
+vim.opt.backup = false -- don't keep a backup after overwriting a file
 
-opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
-}
+-- navigation
 
--- Window management
-opt.splitbelow = true
-opt.splitright = true
-opt.splitkeep = "screen"
-opt.winminwidth = 5
-opt.virtualedit = "block"
+vim.opt.scrolloff = 8 -- keep text more centered when moving cursor
+vim.opt.scroll = 16 -- nr of lines to scroll for CTRL+U and CTRL+D
+vim.opt.numberwidth = 8 -- put some space left of line numbers - text little more centered, easier to see relativelnr
 
--- Clipboard
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+-- syntax, highlighting, spelling
 
--- Formatting
-opt.autowrite = true
-opt.formatoptions = "jcroqlnt"
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+vim.opt.termguicolors = true -- make use of modern terminal emulators (ex: kitty) which supports richer set of colors
+vim.opt.hlsearch = false -- don't preserve all matches for the last used search pattern
 
--- Misc
-opt.jumpoptions = "view"
-opt.sessionoptions = {
-  "buffers", "curdir", "tabpages", "winsize",
-  "help", "globals", "skiprtp", "folds"
-}
-opt.confirm = true
-opt.conceallevel = 2
-opt.spelllang = { "en" }
-opt.wrap = false
+-- multiple windows
+
+vim.opt.splitbelow = true -- open windows below (for example typing :h<Enter> for help)
+vim.opt.splitright = true -- open split window to the right (instead of default left)
+
+-- clipboard
+
+vim.opt.clipboard = "unnamedplus" -- tell nvim to sync clipboard with system keyboard
+
+-- language specific
+
+vim.opt.fileencoding = "utf-8"
 

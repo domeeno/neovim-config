@@ -1,10 +1,15 @@
--- ~/.config/nvim/lua/config/autocmds.lua
+-- autocmds are callbacks we attach on different events of vim
+-- for example the event TextYankPost <- we can hijack when the event
+-- triggers a function.
 
+-- augroup helper
+-- for below autocmds
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
--- ========== File Sync ==========
+-- try and sync file if it was edited somewhere else in parallel
+-- helps us get the latest changes
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
@@ -14,14 +19,15 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- ========== Visuals ==========
+-- brief highlight on yank text
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    (vim.highlight or vim.hl).on_yank()
+    vim.hl.on_yank()
   end,
 })
 
+-- resize splits for tabs/windows on terminal resize
 vim.api.nvim_create_autocmd("VimResized", {
   group = augroup("resize_splits"),
   callback = function()
@@ -31,7 +37,8 @@ vim.api.nvim_create_autocmd("VimResized", {
   end,
 })
 
--- ========== Behavior ==========
+-- try to set position of cursor to the last 
+-- location where you left off.
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)
@@ -47,7 +54,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- ========== UI Filetypes ==========
+-- close temporary buffers like popups with single q press
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -66,6 +73,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- for man pages (I should use them more) to 
+-- be temporary and removed from buffer
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = "man",
@@ -74,7 +83,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- ========== Text Helpers ==========
+-- spellcheck
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
@@ -84,6 +93,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- enforce json display normal
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
@@ -92,7 +102,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- ========== Auto Directories ==========
+-- autocreate directories on save.
+-- ex: nvim some_new_dir/file.txt will panic
+-- if some_new_dir doesn't exist, this autocmd fixes this
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("auto_create_dir"),
   callback = function(event)
@@ -102,10 +114,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- ========== JDTLS Java Setup ==========
-vim.cmd([[
-  augroup jdtls_lsp
-    autocmd!
-    autocmd FileType java lua require("setup.jdlts.jdtls").setup_jdtls()
-  augroup END
-]])
+-- Auto-command to customize chat buffer behavior
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = 'copilot-*',
+  callback = function()
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+    vim.opt_local.conceallevel = 0
+  end,
+})
