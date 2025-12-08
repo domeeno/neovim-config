@@ -6,3 +6,4 @@ require("setup/autocmds")
 require("lazy/setup")
 
 vim.notify(" Started")
+

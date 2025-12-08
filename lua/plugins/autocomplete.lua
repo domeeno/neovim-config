@@ -1,8 +1,10 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets" },
-
+    dependencies = { 
+      "rafamadriz/friendly-snippets",
+      "giuxtaposition/blink-cmp-copilot",
+    },
     version = "1.*",
     opts = {
       -- See :h blink-cmp-config-keymap for defining your own keymap
@@ -21,13 +23,24 @@ return {
 
       sources = {
         -- Default list of enabled providers
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
+          path = {
+            enabled = function()
+              return vim.bo.filetype ~= "copilot-chat"
+            end
+          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 100,
           },
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true
+          }
         },
       },
 

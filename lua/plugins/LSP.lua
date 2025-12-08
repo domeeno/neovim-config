@@ -22,16 +22,22 @@ return {
       vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
 
       vim.diagnostic.config({
-        -- virtual_text = {
-        --   prefix = "󰃤", -- Could be '●', '▎', 'x'
-        --   spacing = 4,
-        -- },
-        virtual_lines = true,
+        virtual_text = {
+          prefix = "󰃤", -- Could be '●', '▎', 'x'
+          spacing = 4,
+        },
+        -- virtual_lines = true,
         signs = true,
         underline = true,
         update_in_insert = false,
         severity_sort = false,
       })
     end
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+    opts = {}
   }
 }
