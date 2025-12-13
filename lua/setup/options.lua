@@ -24,7 +24,7 @@ vim.opt.backup = false -- don't keep a backup after overwriting a file
 
 -- navigation
 
-vim.opt.scrolloff = 8 -- keep text more centered when moving cursor
+vim.opt.scrolloff = 12 -- keep text more centered when moving cursor
 vim.opt.scroll = 16 -- nr of lines to scroll for CTRL+U and CTRL+D
 vim.opt.numberwidth = 8 -- put some space left of line numbers - text little more centered, easier to see relativelnr
 
