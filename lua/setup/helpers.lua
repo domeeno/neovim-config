@@ -1,23 +1,23 @@
 -- keymaps extensions for more complex behavior
 -- open terminal in new tab helper
-tab_terminal = function()
+Tab_terminal = function()
   vim.cmd("tabnew")
   vim.cmd("terminal")
 end
 
-vsplit_terminal = function()
+Vsplit_terminal = function()
   vim.cmd("vsplit")
   vim.cmd("terminal")
 end
 
-hsplit_terminal = function()
+Hsplit_terminal = function()
   vim.cmd("split")
   vim.cmd("terminal")
 end
 
 -- just open terminal in new tab and execute C++ file
 -- TODO: update to support multiple languages
-execute = function(environment)
+Execute = function(environment)
   local file = vim.fn.expand("%")
 
   if file == "" then
@@ -32,4 +32,16 @@ execute = function(environment)
 
   -- Send command to terminal
   vim.fn.chansend(vim.b.terminal_job_id, cmd)
+end
+
+Open_in = function(environment)
+  local dir = vim.fn.expand("%:p:h")
+  if dir == "" then
+    dir = vim.fn.getcwd()
+  end
+
+  environment()
+
+  vim.cmd("lcd " .. dir)
+  vim.cmd("terminal")
 end
