@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("VimResized", {
   end,
 })
 
--- try to set position of cursor to the last 
+-- try to set position of cursor to the last
 -- location where you left off.
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- for man pages (I should use them more) to 
+-- for man pages (I should use them more) to
 -- be temporary and removed from buffer
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),

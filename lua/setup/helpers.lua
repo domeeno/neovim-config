@@ -27,8 +27,12 @@ Execute = function(environment)
 
   environment()
 
+  local flags = "-std=c++20 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror"
+
   -- get language for specific run
-  local cmd = string.format("g++ %s -o a.out && ./a.out\n", file)
+  local cmd = string.format(
+    "g++ %s %s -o a.out && ./a.out\n",
+    file, flags)
 
   -- Send command to terminal
   vim.fn.chansend(vim.b.terminal_job_id, cmd)
