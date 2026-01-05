@@ -1,70 +1,41 @@
 -- TREESITTER CONFIG
 
 return {
-  { 
+  {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        -- keybindings
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<Leader>si", -- (s)election (i)nit,
-            node_incremental = "<Leader>sw", -- (s)election up (w) like the games up == 'w'
-            scope_incremental = "<Leader>s<Leader>", -- (s)election jump - like jumping space, it's a big select
-            node_decremental = "<Leader>ss", -- (s)selection down (s) like the games back == 's'
-          },
-        },
-        -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-        ensure_installed = { "c", "cpp", "python", "java", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+      local languages = {
+        "c", "cpp", "python", "java", "lua", "vim", "vimdoc",
+        "query", "markdown", "markdown_inline",
+      }
+      require('nvim-treesitter').install(languages)
 
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-        auto_install = true,
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('treesitter.setup', {}),
+        callback = function(args)
+          local buf = args.buf
+          local filetype = args.match
 
-        -- List of parsers to ignore installing (or "all")
-        ignore_install = { },
+          -- you need some mechanism to avoid running on buffers that do not
+          -- correspond to a language (like oil.nvim buffers), this implementation
+          -- checks if a parser exists for the current language
+          local language = vim.treesitter.language.get_lang(filetype) or filetype
+          if not vim.treesitter.language.add(language) then
+            return
+          end
 
-        highlight = {
-          enable = true,
+          -- replicate `fold = { enable = true }`
+          vim.wo.foldmethod = 'expr'
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-          -- list of language that will be disabled
-          disable = { },
-        },
+          -- replicate `highlight = { enable = true }`
+          vim.treesitter.start(buf, language)
 
-        -- nvim-treesitter/nvim-treesitter-textobjects module (imported below)
-        textobjects = {
-          select = {
-            enable = true,
-
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              -- You can optionally set descriptions to the mappings (used in the desc parameter of
-              -- nvim_buf_set_keymap) which plugins like which-key display
-              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-              -- You can also use captures from other query groups like `locals.scm`
-              ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-            },
-            -- mapping query_strings to modes.
-            selection_modes = {
-              ['@parameter.outer'] = 'v', -- charwise
-              ['@function.outer'] = 'v', -- ('V') if linewise
-              ['@class.outer'] = '<c-v>', -- blockwise
-            },
-            -- If you set this to `true` (default is `false`) then any textobject is
-            -- extended to include preceding or succeeding whitespace. 
-            include_surrounding_whitespace = true,
-          },
-        },
+          -- replicate `indent = { enable = true }`
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
       })
     end
-  },
-  -- add textobjects module to treesitter
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  }
 }

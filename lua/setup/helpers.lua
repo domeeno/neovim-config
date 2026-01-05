@@ -27,7 +27,7 @@ Execute = function(environment)
 
   environment()
 
-  local flags = "-std=c++20 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror"
+  local flags = "-std=c++23 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror"
 
   -- get language for specific run
   local cmd = string.format(
