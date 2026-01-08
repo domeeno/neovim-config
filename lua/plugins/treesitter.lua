@@ -25,10 +25,10 @@ return {
             return
           end
 
-          -- replicate `fold = { enable = true }`
-          vim.wo.foldmethod = 'expr'
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
+          -- replicate `feclarationold = { enable = true }`
+          -- vim.wo.foldmethod = 'expr'
+          -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          --
           -- replicate `highlight = { enable = true }`
           vim.treesitter.start(buf, language)
 

@@ -1,10 +1,9 @@
 return {
   {
-    "nvim-telescope/telescope.nvim", 
+    "nvim-telescope/telescope.nvim",
     tag = "v0.2.0",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local telescope = require('telescope')
       local builtin = require('telescope.builtin')
 
       -- keymaps
@@ -18,6 +17,13 @@ return {
       -- etc. keymaps
       vim.keymap.set('n', '<leader>ch', builtin.command_history, { desc = '[C]ommand [H]istory' })
       vim.keymap.set('n', '<leader>cs', builtin.colorscheme, { desc = '[C]olor [S]cheme' })
+
+      -- code nav & diagnostics
+      vim.keymap.set('n', 'gD', builtin.diagnostics, { desc = '[D]iagnostics', buffer = 0 })
+      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'Go to [D]efinition' })
+      vim.keymap.set('n', 'gi', builtin.lsp_implementations, { desc = 'Go to [I]mpl' })
+      vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = 'Go to [R]efs' })
+      vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { desc = 'Go to [T]ype Defs' })
     end
   }
 }
