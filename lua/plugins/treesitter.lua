@@ -6,13 +6,22 @@ return {
     branch = "main",
     config = function()
       local languages = {
-        "c", "cpp", "python", "java", "lua", "vim", "vimdoc",
-        "query", "markdown", "markdown_inline",
+        -- general
+        "c",
+        "cpp",
+        "python",
+        "java",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
       }
-      require('nvim-treesitter').install(languages)
+      require("nvim-treesitter").install(languages)
 
-      vim.api.nvim_create_autocmd('FileType', {
-        group = vim.api.nvim_create_augroup('treesitter.setup', {}),
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("treesitter.setup", {}),
         callback = function(args)
           local buf = args.buf
           local filetype = args.match
@@ -36,6 +45,6 @@ return {
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
-    end
-  }
+    end,
+  },
 }
