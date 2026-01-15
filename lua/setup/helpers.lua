@@ -30,12 +30,23 @@ Execute = function(environment)
   local flags = "-std=c++23 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror"
 
   -- get language for specific run
-  local cmd = string.format(
-    "g++ %s %s -o a.out && ./a.out\n",
-    file, flags)
+  local cmd = string.format("g++ %s %s -o a.out && ./a.out\n", file, flags)
 
   -- Send command to terminal
   vim.fn.chansend(vim.b.terminal_job_id, cmd)
+end
+
+Open_working_dir = function(environment)
+  local dir = vim.lsp.buf.list_workspace_folders()[1]
+
+  if dir == "" then
+    dir = vim.fn.getcwd()
+  end
+
+  environment()
+
+  vim.cmd("lcd " .. dir)
+  vim.cmd("terminal")
 end
 
 Open_in = function(environment)

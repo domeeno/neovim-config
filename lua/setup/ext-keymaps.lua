@@ -5,7 +5,7 @@ vim.keymap.set("n", "<leader>ht", function()
 end, { desc = "Open [T]erminal in current file's directory" })
 
 vim.keymap.set("n", "<C-t>", function()
-  Open_in(Hsplit_terminal)
+  Open_working_dir(Hsplit_terminal)
 end, { desc = "Open [T]erminal in current file's directory" })
 
 vim.keymap.set("n", "<leader>t", function()
