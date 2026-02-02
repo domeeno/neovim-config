@@ -68,7 +68,7 @@ return {
           prefix = "󰃤", -- Could be '●', '▎', 'x'
           spacing = 4,
         },
-        virtual_lines = true,
+        -- virtual_lines = true,
         signs = true,
         underline = true,
         update_in_insert = false,
