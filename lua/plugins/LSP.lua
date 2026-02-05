@@ -46,9 +46,8 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "pyright",
-          "jedi_language_server",
-          "pylsp",
           "gopls",
+          "ruff",
           "bashls",
           "lua_ls",
           "starpls",

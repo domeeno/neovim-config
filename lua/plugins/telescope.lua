@@ -29,6 +29,11 @@ return {
       vim.keymap.set('n', '<leader>gh', builtin.git_commits, { desc = '[G]it Commit [H]istory' })
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
       vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [S]tatus' })
+
+      -- Custom keymaps
+      vim.keymap.set("n", "gt", function()
+        builtin.lsp_definitions({ jump_type = "tab" })
+      end, { desc = "Definition in new tab" })
     end
   }
 }
