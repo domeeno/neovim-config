@@ -34,6 +34,7 @@ vim.keymap.set("v", "<leader>rr", [["hy:%s/<C-r>h//g<Left><Left>]], { desc = "Re
 vim.keymap.set("n", "<A-.>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "<A-l>", "<cmd>tabnext<cr>", { desc = "Next Tab" })         -- l for → (right)
 vim.keymap.set("n", "<A-h>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" }) -- h for ← (left)
+
 for i = 1, 9 do
   vim.keymap.set("n", ("<leader>%d"):format(i), ("<cmd>tabnext %d<cr>"):format(i), { desc = ("Go to Tab %d"):format(i) })
 end
@@ -46,6 +47,7 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
+
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
@@ -53,3 +55,7 @@ vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" 
 vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+-- open ntree
+vim.keymap.set("n", "<leader>e", "<cmd>Ex<cr>", { desc = "Explorer" })
+
