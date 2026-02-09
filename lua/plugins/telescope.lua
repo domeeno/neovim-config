@@ -22,7 +22,13 @@ return {
       vim.keymap.set('n', 'gi', builtin.lsp_implementations, { desc = '[G]o to [I]mplementations' })
       vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = '[G]o to [R]efeferences' })
       vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { desc = '[G]o to [T]ype Defs' })
+
+      -- symbols
       vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
+      -- same as lsp_document_symbols but filter for methods only
+      vim.keymap.set('n', '<leader>dm', function()
+        builtin.lsp_document_symbols({ symbols = { 'method' } })
+      end, { desc = '[D]ocument Symbols [M]ethods' })
       vim.keymap.set('n', '<leader>ws', builtin.lsp_workspace_symbols, { desc = '[W]orkspace [S]ymbols' })
 
       -- VCS
