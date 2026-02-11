@@ -56,6 +56,3 @@ vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error"
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- open ntree
-vim.keymap.set("n", "<leader>e", "<cmd>Ex<cr>", { desc = "Explorer" })
-
