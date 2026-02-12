@@ -9,16 +9,21 @@ return {
     },
     config = function()
       require("neo-tree").setup({
-        vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true, desc = "[E]xplorer" }),
-        vim.keymap.set("n", "<leader>ge", ":Neotree float git_status<CR>", { noremap = true, silent = true, desc = "[G]it Status [E]xplore" }),
+        close_if_last_window = true,
+        window = {
+          position = "right",
+        }
       })
+      vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true, desc = "[E]xplorer" })
+      vim.keymap.set("n", "<leader>ge", ":Neotree float git_status<CR>",
+        { noremap = true, silent = true, desc = "[G]it Status [E]xplore" })
     end,
   },
   {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
+      "nvim-neo-tree/neo-tree.nvim",
     },
     config = function()
       require("lsp-file-operations").setup()
