@@ -7,7 +7,9 @@ on:
 jobs:
   claude:
     # Only trigger if Claude is the assignee
-    if: contains(github.event.issue.assignees.*.login, 'claude-code[bot]')
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required to create branches and push code
