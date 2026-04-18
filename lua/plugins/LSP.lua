@@ -51,7 +51,7 @@ return {
           "bashls",
           "lua_ls",
           "starpls",
-          "sonarlint",
+          -- "sonarlint",
         },
       })
 

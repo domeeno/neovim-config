@@ -1,9 +1,8 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { 
-      "rafamadriz/friendly-snippets",
-      "giuxtaposition/blink-cmp-copilot",
+    dependencies = {
+      "rafamadriz/friendly-snippets"
     },
     version = "1.*",
     opts = {
@@ -23,23 +22,12 @@ return {
 
       sources = {
         -- Default list of enabled providers
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {
-          path = {
-            enabled = function()
-              return vim.bo.filetype ~= "copilot-chat"
-            end
-          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 100,
-          },
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
-            score_offset = 100,
-            async = true
           }
         },
       },
