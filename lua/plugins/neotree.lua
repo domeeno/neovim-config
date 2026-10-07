@@ -12,21 +12,30 @@ return {
         close_if_last_window = true,
         window = {
           position = "right",
-        }
+        },
       })
-      vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true, desc = "[E]xplorer" })
-      vim.keymap.set("n", "<leader>ge", ":Neotree float git_status<CR>",
-        { noremap = true, silent = true, desc = "[G]it Status [E]xplore" })
+      vim.keymap.set(
+        "n",
+        "<leader>e",
+        ":Neotree toggle<CR>",
+        { noremap = true, silent = true, desc = "[E]xplorer" }
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>ge",
+        ":Neotree float git_status<CR>",
+        { noremap = true, silent = true, desc = "[G]it Status [E]xplore" }
+      )
     end,
   },
   {
-    "antosha417/nvim-lsp-file-operations",
+    "Crysthamus/nvim-file-operations",
+    -- branch = "compat" -- if you are on Neovim <= 0.10
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-neo-tree/neo-tree.nvim",
+      "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
     },
     config = function()
-      require("lsp-file-operations").setup()
+      require("nvim-file-operations").setup()
     end,
   },
   {
