@@ -44,7 +44,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then return end
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
     vim.b[buf].lazyvim_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
@@ -58,9 +60,21 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
-    "help", "qf", "lspinfo", "notify", "spectre_panel", "tsplayground",
-    "neotest-output", "neotest-summary", "neotest-output-panel", "checkhealth",
-    "gitsigns-blame", "PlenaryTestPopup", "startuptime", "snacks_win", "grug-far",
+    "help",
+    "qf",
+    "lspinfo",
+    "notify",
+    "spectre_panel",
+    "tsplayground",
+    "neotest-output",
+    "neotest-summary",
+    "neotest-output-panel",
+    "checkhealth",
+    "gitsigns-blame",
+    "PlenaryTestPopup",
+    "startuptime",
+    "snacks_win",
+    "grug-far",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -108,15 +122,17 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("auto_create_dir"),
   callback = function(event)
-    if event.match:match("^%w%w+:[\\/][\\/]") then return end
+    if event.match:match("^%w%w+:[\\/][\\/]") then
+      return
+    end
     local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
 
 -- Auto-command to customize chat buffer behavior
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = 'copilot-*',
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "copilot-*",
   callback = function()
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
