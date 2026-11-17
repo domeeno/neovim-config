@@ -1,0 +1,23 @@
+{
+  "Allocate and check pointer": {
+    "prefix": "malloc",
+    "body": [
+      "${1:type} *${2:name} = malloc(${3:count} * sizeof(*${2:name}));",
+      "",
+      "if (${2:name} == nullptr) {",
+      "\tfprintf(stderr, \"${2:name}: allocation error\\n\");",
+      "\texit(EXIT_FAILURE);",
+      "}"
+    ],
+    "description": "Allocate and check pointer"
+  },
+  "fori loop": {
+    "prefix": "fori",
+    "body": [
+      "for (int i = 0; i < ${1:iterator}; i++) {",
+      "\t${2:do};",
+      "}"
+    ],
+    "description": "fori loop"
+  }
+}

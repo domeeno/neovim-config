@@ -1,0 +1,82 @@
+{
+  "Beamer Frame": {
+    "prefix": "fr",
+    "body": [
+      "\\begin{frame}{${1:Title}}",
+      "  ${2:Content}",
+      "\\end{frame}"
+    ],
+    "description": "Create a Beamer frame"
+  },
+  "Beamer Block": {
+    "prefix": "bl",
+    "body": [
+      "\\begin{block}{${1:Title}}",
+      "  ${2:Content}",
+      "\\end{block}"
+    ],
+    "description": "Create a Beamer frame"
+  },
+  "Beamer Block Frame": {
+    "prefix": "blfr",
+    "body": [
+      "\\begin{frame}{${1:Title}}",
+      "  \\begin{block}{${2:Block Title}}",
+      "    ${3:Content}",
+      "  \\end{block}",
+      "\\end{frame}"
+    ],
+    "description": "Create a Beamer frame with a block"
+  },
+  "Beamer Slide with Overlays": {
+    "prefix": "slide",
+    "body": [
+      "\\begin{frame}{${1:Title}}",
+      "  \\begin{block}{${2:Block Title}}",
+      "    \\begin{itemize}",
+      "      \\item<2-> ${3:Item}",
+      "      \\item<3-> ${4:Item}",
+      "      \\item<4-> ${5:Item}",
+      "    \\end{itemize}",
+      "  \\end{block}",
+      "\\end{frame}"
+    ],
+    "description": "Create a Beamer slide with progressive item reveals"
+  },
+  "Itemize with Overlays": {
+    "prefix": "ita",
+    "body": [
+      "\\begin{itemize}",
+      "  \\item<2-> ${1:Item}",
+      "  \\item<3-> ${2:Item}",
+      "  \\item<4-> ${3:Item}",
+      "\\end{itemize}"
+    ],
+    "description": "Create an itemize list with progressive reveals"
+  },
+  "Itemize List": {
+    "prefix": "it",
+    "body": [
+      "\\begin{itemize}",
+      "  \\item ${1:Item}",
+      "  \\item ${2:Item}",
+      "  \\item ${3:Item}",
+      "\\end{itemize}"
+    ],
+    "description": "Create a basic itemize list"
+  },
+  "Two Columns": {
+    "prefix": "cl",
+    "body": [
+      "\\begin{columns}",
+      "  \\begin{column}{0.50\\textwidth}",
+      "    ${1:Left}",
+      "  \\end{column}",
+      "  \\begin{column}{0.50\\textwidth}",
+      "    ${2:Right}",
+      "  \\end{column}",
+      "\\end{columns}"
+    ],
+    "description": "Create two equal-width Beamer columns"
+  }
+}

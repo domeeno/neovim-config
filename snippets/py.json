@@ -1,0 +1,11 @@
+{
+  "Read file line by line": {
+    "prefix": "rfl",
+    "body": [
+      "with open(\"${1:file.txt}\", \"r\", encoding=\"utf-8\") as ${2:file}:",
+      "\tfor ${3:line} in ${2:file}:",
+      "\t\t${0:pass}"
+    ],
+    "description": "Read a file line by line"
+  }
+}

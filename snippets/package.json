@@ -1,0 +1,26 @@
+{
+  "name": "personal-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "tex",
+          "plaintex"
+        ],
+        "path": "./latex.json"
+      },
+      {
+        "language": [
+          "python"
+        ],
+        "path": "./py.json"
+      },
+      {
+        "language": [
+          "c"
+        ],
+        "path": "./c.json"
+      }
+    ]
+  }
+}
