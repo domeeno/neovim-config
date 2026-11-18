@@ -1,0 +1,8 @@
+{
+  "Read file line by line": {
+    "prefix": "rfl",
+    "body": [
+    ],
+    "description": "Read a file line by line"
+  }
+}
